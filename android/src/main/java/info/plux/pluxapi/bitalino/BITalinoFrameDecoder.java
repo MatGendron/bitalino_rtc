@@ -39,7 +39,7 @@ public class BITalinoFrameDecoder {
                 frame.setSeconds(buffer[j] & 0x7F);
                 frame.setMinutes(buffer[j-1] & 0x7F);
                 frame.setHours(((buffer[j-2] & 0xFC) >> 2) & 0xCF);
-                frame.setMilliseconds(((buffer[j-2] & 0x03) << 8 ) | ((buffer[j-3] & 0xFF)) & 0x3FF)
+                frame.setMilliseconds(((buffer[j-2] & 0x03) << 8 ) | (buffer[j-3] & 0xFF) & 0x3FF);
                 frame.setSequence(((buffer[j - 4] & 0xF0) >> 4) & 0xf);
                 frame.setDigital(0, (buffer[j - 5] >> 7) & 0x01);
                 frame.setDigital(1, (buffer[j - 5] >> 6) & 0x01);
