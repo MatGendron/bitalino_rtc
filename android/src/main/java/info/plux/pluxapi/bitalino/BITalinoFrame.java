@@ -14,17 +14,35 @@ import android.os.Parcelable;
 
 import java.util.Arrays;
 
+//RTC: Need to add fields for time data
 public class BITalinoFrame implements Parcelable {
     private String identifier;
     private int seq;
     private int[] analog = new int[6];
     private int[] digital = new int[4];
+    private int hours, minutes, seconds, milliseconds;
 
     public BITalinoFrame(String identifier, int seq, int[] analog, int[] digital) {
         this.identifier = identifier;
         this.seq = seq;
         this.analog = analog;
         this.digital = digital;
+        this.hours = 0;
+        this.minutes = 0;
+        this.seconds = 0;
+        this.milliseconds = 0;
+    }
+
+    public BITalinoFrame(String identifier, int seq, int[] analog, int[] digital,
+                         int hours, int minutes, int seconds, int milliseconds) {
+        this.identifier = identifier;
+        this.seq = seq;
+        this.analog = analog;
+        this.digital = digital;
+        this.hours = hours;
+        this.minutes = minutes;
+        this.seconds = seconds;
+        this.milliseconds = milliseconds;
     }
 
     public BITalinoFrame(String identifier) {
@@ -79,8 +97,41 @@ public class BITalinoFrame implements Parcelable {
         this.digital = digital;
     }
 
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
+    }
+
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public void setMilliseconds(int milliseconds) {
+        this.milliseconds = milliseconds;
+    }
+
+    public int getMilliseconds() {
+        return milliseconds;
+    }
+
     public String toString(){
-        return identifier + ": Seq: " + getSequence() + "; Analog: " + Arrays.toString(analog) + "; Digital: " + Arrays.toString(digital);
+        return identifier + ": Seq: " + getSequence() + "; Analog: " + Arrays.toString(analog) + "; Digital: " + Arrays.toString(digital)
+                + "; Time: " + getHours() + ":" + getMinutes() + ":" + getSeconds() + "." + getMilliseconds();
     }
 
 

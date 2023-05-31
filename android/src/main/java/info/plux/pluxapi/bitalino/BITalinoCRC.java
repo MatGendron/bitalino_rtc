@@ -21,14 +21,15 @@ public class BITalinoCRC {
     public static byte getCRC4(byte[] data) {
         byte crc = (byte)0x00;
 
-        for (int i = 0; i < data.length - 1; i++){
+        //RTC: Need to make it data.length - 5 to keep the same behavior
+        for (int i = 0; i < data.length - 5; i++){
             //crc = CRC8tab[crc ^ data[i]];
             crc = (byte)((CRC4tab[crc] & 0xFF) ^ ((data[i] & 0xFF) >> 4));
             crc = (byte)((CRC4tab[crc] & 0xFF) ^ ((data[i] & 0xFF) & 0x0F));
         }
 
         //for last byte
-        crc = (byte)((CRC4tab[crc] & 0xFF) ^ ((data[data.length - 1] & 0xFF) >> 4));
+        crc = (byte)((CRC4tab[crc] & 0xFF) ^ ((data[data.length - 5] & 0xFF) >> 4));
         crc = (byte)(CRC4tab[crc] & 0xFF);
 
         return crc;
