@@ -323,6 +323,10 @@ final class BITalino implements MethodChannel.MethodCallHandler {
             dataBuffer.put("sequence", frame.getSequence());
             dataBuffer.put("analog", frame.getAnalogArray());
             dataBuffer.put("digital", frame.getDigitalArray());
+            dataBuffer.put("hours", frame.getHours());
+            dataBuffer.put("minutes", frame.getMinutes());
+            dataBuffer.put("seconds", frame.getSeconds());
+            dataBuffer.put("milliseconds", frame.getMilliseconds());
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
