@@ -10,6 +10,7 @@
 package info.plux.pluxapi.bitalino;
 
 import android.annotation.TargetApi;
+import java.nio.charset.StandardCharsets;
 import android.util.Log;
 import android.os.Build;
 
