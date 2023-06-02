@@ -10,6 +10,7 @@
 package info.plux.pluxapi.bitalino;
 
 import android.annotation.TargetApi;
+import android.util.Log;
 import android.os.Build;
 
 import java.io.IOException;
