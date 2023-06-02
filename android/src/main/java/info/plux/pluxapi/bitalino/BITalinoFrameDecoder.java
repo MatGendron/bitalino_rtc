@@ -22,7 +22,8 @@ public class BITalinoFrameDecoder {
     public static BITalinoFrame decode(final String identifier, final byte[] buffer, final int[] analogChannels, final int totalBytes) throws IOException, BITalinoException {
 
         try {
-            Log.e(TAG,buffer);
+            String str = new String(buffer, StandardCharsets.UTF_8);
+            Log.e(TAG,str);
             BITalinoFrame frame;
             //RTC: -4 à toutes les valeurs d'index du buffer pour prendre en compte
             //les données de temps ajoutées
