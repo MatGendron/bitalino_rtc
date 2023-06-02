@@ -10,11 +10,11 @@
 package info.plux.pluxapi.bitalino;
 
 import android.annotation.TargetApi;
-import java.nio.charset.StandardCharsets;
 import android.util.Log;
 import android.os.Build;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class BITalinoFrameDecoder {
     private static final String TAG = "BITalinoFrameDecoder";
@@ -23,8 +23,7 @@ public class BITalinoFrameDecoder {
     public static BITalinoFrame decode(final String identifier, final byte[] buffer, final int[] analogChannels, final int totalBytes) throws IOException, BITalinoException {
 
         try {
-            String str = new String(buffer, StandardCharsets.UTF_8);
-            Log.e(TAG,str);
+            Log.e(TAG, Arrays.toString(buffer));
             BITalinoFrame frame;
             //RTC: -4 à toutes les valeurs d'index du buffer pour prendre en compte
             //les données de temps ajoutées
