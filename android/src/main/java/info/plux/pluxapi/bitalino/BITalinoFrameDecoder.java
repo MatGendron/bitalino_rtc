@@ -12,7 +12,7 @@ package info.plux.pluxapi.bitalino;
 import android.annotation.TargetApi;
 import android.util.Log;
 import android.os.Build;
-import java.nio.charset.StandardCharsets
+import java.nio.charset.StandardCharsets;
 
 import java.io.IOException;
 import java.util.Arrays;
