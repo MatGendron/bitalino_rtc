@@ -12,6 +12,7 @@ package info.plux.pluxapi.bitalino;
 import android.annotation.TargetApi;
 import android.util.Log;
 import android.os.Build;
+import org.apache.commons.codec.binary.Hex;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -24,6 +25,7 @@ public class BITalinoFrameDecoder {
 
         try {
             Log.e(TAG, Arrays.toString(buffer));
+            Log.e(TAG, Hex.encodeHexString(buffer));
             BITalinoFrame frame;
             //RTC: -4 à toutes les valeurs d'index du buffer pour prendre en compte
             //les données de temps ajoutées
