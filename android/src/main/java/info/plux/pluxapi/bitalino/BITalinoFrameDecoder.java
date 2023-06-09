@@ -43,7 +43,7 @@ public class BITalinoFrameDecoder {
                 //RTC: Récupération des infos de temps
                 frame.setSeconds(buffer[j] & 0x7F);
                 frame.setMinutes(buffer[j-1] & 0x7F);
-                frame.setHours(((buffer[j-2] & 0xFC) >> 2) & 0xCF);
+                frame.setHours(((buffer[j-2]) >> 2) & 0x3F);
                 frame.setMilliseconds(((buffer[j-2] & 0x03) << 8 ) | (buffer[j-3] & 0xFF) & 0x3FF);
                 frame.setSequence(((buffer[j - 4] & 0xF0) >> 4) & 0xf);
                 frame.setDigital(0, (buffer[j - 5] >> 7) & 0x01);
