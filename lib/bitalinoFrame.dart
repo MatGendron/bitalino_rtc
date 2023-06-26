@@ -8,10 +8,14 @@ class BITalinoFrame {
         sequence = data['sequence'],
         analog = List<int>.from(data['analog']),
         digital = List<int>.from(data['digital']),
-        hours = data['hours'],
-        minutes = data['minutes'],
-        seconds = data['seconds'],
-        milliseconds = data['milliseconds'];
+        BIThours = data['BIThours'],
+        BITminutes = data['BITminutes'],
+        BITseconds = data['BITseconds'],
+        BITmilliseconds = data['BITmilliseconds'],
+        APIhours = data['APIhours'],
+        APIminutes = data['APIminutes'],
+        APIseconds = data['APIseconds'],
+        APImilliseconds = data['APImilliseconds'];
 
   /// MAC address of the device that sent the frame.
   final String identifier;
@@ -26,11 +30,19 @@ class BITalinoFrame {
   final List<int> digital;
 
   /// RTC: Time data fields
-  final int hours;
+  final int BIThours;
 
-  final int minutes;
+  final int BITminutes;
 
-  final int seconds;
+  final int BITseconds;
 
-  final int milliseconds;
+  final int BITmilliseconds;
+
+  final int APIhours;
+
+  final int APIminutes;
+
+  final int APIseconds;
+
+  final int APImilliseconds;
 }

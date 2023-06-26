@@ -15,6 +15,8 @@ import android.os.Build;
 import java.nio.charset.StandardCharsets;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 
 public class BITalinoFrameDecoder {
@@ -41,10 +43,15 @@ public class BITalinoFrameDecoder {
             if(Byte.compare(byteCRC, BITalinoCRC.getCRC4(arrayCRC)) == 0){
                 frame = new BITalinoFrame(identifier);
                 //RTC: Récupération des infos de temps
-                frame.setSeconds(buffer[j] & 0x7F);
-                frame.setMinutes(buffer[j-1] & 0x7F);
-                frame.setHours(((buffer[j-2]) >> 2) & 0x3F);
-                frame.setMilliseconds(((buffer[j-2] & 0x03) << 8 ) | (buffer[j-3] & 0xFF) & 0x3FF);
+                LocalTime APItime = LocalTime.now();
+                frame.setBITseconds(buffer[j] & 0x7F);
+                frame.setBITminutes(buffer[j-1] & 0x7F);
+                frame.setBIThours(((buffer[j-2]) >> 2) & 0x3F);
+                frame.setBITmilliseconds(((buffer[j-2] & 0x03) << 8 ) | (buffer[j-3] & 0xFF) & 0x3FF);
+                frame.setAPIseconds(APItime.getSecond());
+                frame.setAPIminutes(APItime.getMinute());
+                frame.setAPIhours(APItime.getHour());
+                frame.setAPImilliseconds(APItime.getNano()/1000000);
                 frame.setSequence(((buffer[j - 4] & 0xF0) >> 4) & 0xf);
                 frame.setDigital(0, (buffer[j - 5] >> 7) & 0x01);
                 frame.setDigital(1, (buffer[j - 5] >> 6) & 0x01);

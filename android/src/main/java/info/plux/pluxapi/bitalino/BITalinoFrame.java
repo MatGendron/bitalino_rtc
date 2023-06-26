@@ -20,29 +20,39 @@ public class BITalinoFrame implements Parcelable {
     private int seq;
     private int[] analog = new int[6];
     private int[] digital = new int[4];
-    private int hours, minutes, seconds, milliseconds;
+    private int BIThours, BITminutes, BITseconds, BITmilliseconds;
+    private int APIhours, APIminutes, APIseconds, APImilliseconds;
 
     public BITalinoFrame(String identifier, int seq, int[] analog, int[] digital) {
         this.identifier = identifier;
         this.seq = seq;
         this.analog = analog;
         this.digital = digital;
-        this.hours = 0;
-        this.minutes = 0;
-        this.seconds = 0;
-        this.milliseconds = 0;
+        this.BIThours = 0;
+        this.BITminutes = 0;
+        this.BITseconds = 0;
+        this.BITmilliseconds = 0;
+        this.APIhours = 0;
+        this.APIminutes = 0;
+        this.APIseconds = 0;
+        this.APImilliseconds = 0;
     }
 
     public BITalinoFrame(String identifier, int seq, int[] analog, int[] digital,
-                         int hours, int minutes, int seconds, int milliseconds) {
+                         int BIThours, int BITminutes, int BITseconds, int BITmilliseconds,
+                         int APIhours, int APIminutes, int APIseconds, int APImilliseconds) {
         this.identifier = identifier;
         this.seq = seq;
         this.analog = analog;
         this.digital = digital;
-        this.hours = hours;
-        this.minutes = minutes;
-        this.seconds = seconds;
-        this.milliseconds = milliseconds;
+        this.BIThours = BIThours;
+        this.BITminutes = BITminutes;
+        this.BITseconds = BITseconds;
+        this.BITmilliseconds = BITmilliseconds;
+        this.APIhours = APIhours;
+        this.APIminutes = APIminutes;
+        this.APIseconds = APIseconds;
+        this.APImilliseconds = APImilliseconds;
     }
 
     public BITalinoFrame(String identifier) {
@@ -97,36 +107,68 @@ public class BITalinoFrame implements Parcelable {
         this.digital = digital;
     }
 
-    public void setHours(int hours) {
-        this.hours = hours;
+    public void setBIThours(int BIThours) {
+        this.BIThours = BIThours;
     }
 
-    public int getHours() {
-        return hours;
+    public int getBIThours() {
+        return BIThours;
     }
 
-    public void setMinutes(int minutes) {
-        this.minutes = minutes;
+    public void setBITminutes(int BITminutes) {
+        this.BITminutes = BITminutes;
     }
 
-    public int getMinutes() {
-        return minutes;
+    public int getBITminutes() {
+        return BITminutes;
     }
 
-    public void setSeconds(int seconds) {
-        this.seconds = seconds;
+    public void setBITseconds(int BITseconds) {
+        this.BITseconds = BITseconds;
     }
 
-    public int getSeconds() {
-        return seconds;
+    public int getBITseconds() {
+        return BITseconds;
     }
 
-    public void setMilliseconds(int milliseconds) {
-        this.milliseconds = milliseconds;
+    public void setBITmilliseconds(int BITmilliseconds) {
+        this.BITmilliseconds = BITmilliseconds;
     }
 
-    public int getMilliseconds() {
-        return milliseconds;
+    public int getBITmilliseconds() {
+        return BITmilliseconds;
+    }
+
+    public void setAPIhours(int APIhours) {
+        this.APIhours = APIhours;
+    }
+
+    public int getAPIhours() {
+        return APIhours;
+    }
+
+    public void setAPIminutes(int APIminutes) {
+        this.APIminutes = APIminutes;
+    }
+
+    public int getAPIminutes() {
+        return APIminutes;
+    }
+
+    public void setAPIseconds(int APIseconds) {
+        this.APIseconds = APIseconds;
+    }
+
+    public int getAPIseconds() {
+        return APIseconds;
+    }
+
+    public void setAPImilliseconds(int APImilliseconds) {
+        this.APImilliseconds = APImilliseconds;
+    }
+
+    public int getAPImilliseconds() {
+        return APImilliseconds;
     }
 
     public String toString(){
