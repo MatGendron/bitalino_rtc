@@ -173,7 +173,8 @@ public class BITalinoFrame implements Parcelable {
 
     public String toString(){
         return identifier + ": Seq: " + getSequence() + "; Analog: " + Arrays.toString(analog) + "; Digital: " + Arrays.toString(digital)
-                + "; Time: " + getHours() + ":" + getMinutes() + ":" + getSeconds() + "." + getMilliseconds();
+                + "; BITtime: " + getBIThours() + ":" + getBITminutes() + ":" + getBITseconds() + "." + getBITmilliseconds()
+                + "; APItime: " + getAPIhours() + ":" + getAPIminutes() + ":" + getAPIseconds() + "." + getAPImilliseconds();
     }
 
 
