@@ -28,6 +28,8 @@ import info.plux.pluxapi.bitalino.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -57,6 +59,9 @@ public class BTHCommunication extends BITalinoCommunication {
     // Member fields
     private final BluetoothAdapter mAdapter;
     private final OnBITalinoDataAvailable callback;
+    //RTC: Additional field to save sampleRate
+    private int ComSampleRate;
+    private LocalTime BITtime;
     private final BroadcastReceiver incomingPairRequestReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -185,6 +190,8 @@ public class BTHCommunication extends BITalinoCommunication {
     protected boolean setFreq(int sampleRate) throws BITalinoException {
         CommandArguments commandArguments = new CommandArguments();
         commandArguments.setSampleRate(validateSampleRate(sampleRate));
+        ComSampleRate = validateSampleRate(sampleRate);
+        BITtime = LocalTime.now();
 
         byte[] command = BITalino.SET_FREQ.getCommand(commandArguments).command;
 
@@ -717,6 +724,12 @@ public class BTHCommunication extends BITalinoCommunication {
                                         int nSeq = bitalinoFrame.getSequence() - previousSeq;
                                         Log.e(TAG, mBluetoothDeviceAddress + " - lost: " + nSeq + " frames");
                                     }
+                                    BITtime.plusNanos(((bitalinoFrame.getSequence() - previousSeq) % 16) *
+                                            (1000/ComSampleRate) * 1000000 );
+                                    bitalinoFrame.setBITseconds(BITtime.getSecond());
+                                    bitalinoFrame.setBITminutes(BITtime.getMinute());
+                                    bitalinoFrame.setBIThours(BITtime.getHour());
+                                    bitalinoFrame.setBITmilliseconds(BITtime.getNano()/1000000);
                                     previousSeq = bitalinoFrame.getSequence();
 
                                     callback.onBITalinoDataAvailable(bitalinoFrame);

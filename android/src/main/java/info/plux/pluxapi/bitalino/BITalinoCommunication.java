@@ -153,16 +153,13 @@ public abstract class BITalinoCommunication {
         return channels;
     }
 
-    //RTC: Just need to add the size of the time data
-    //in bit to the fixed size part of the expression.
-    //Said size is equal to 8 * 4 = 32
     /**
      * Calculates the byte array length
      * @param analogChannels
      * @return
      */
     protected int calculateTotalBytes(int [] analogChannels){
-        return analogChannels.length <= 4 ? (int) Math.ceil((44f + 10f * analogChannels.length) / 8) : (int) Math.ceil((84f + 6f * (analogChannels.length - 4)) / 8);
+        return analogChannels.length <= 4 ? (int) Math.ceil((12f + 10f * analogChannels.length) / 8) : (int) Math.ceil((52f + 6f * (analogChannels.length - 4)) / 8);
     }
 
 
