@@ -21,8 +21,6 @@ import java.util.Arrays;
 
 public class BITalinoFrameDecoder {
     private static final String TAG = "BITalinoFrameDecoder";
-    private static LocalTime BITalinoTime;
-    private static
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public static BITalinoFrame decode(final String identifier, final byte[] buffer, final int[] analogChannels, final int totalBytes) throws IOException, BITalinoException {
