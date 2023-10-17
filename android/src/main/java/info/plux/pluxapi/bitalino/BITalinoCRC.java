@@ -28,7 +28,7 @@ public class BITalinoCRC {
         }
 
         //for last byte
-        crc = (byte)((CRC4tab[crc] & 0xFF) ^ ((data[data.length - 5] & 0xFF) >> 4));
+        crc = (byte)((CRC4tab[crc] & 0xFF) ^ ((data[data.length - 1] & 0xFF) >> 4));
         crc = (byte)(CRC4tab[crc] & 0xFF);
 
         return crc;
