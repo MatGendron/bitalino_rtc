@@ -41,17 +41,17 @@ public class BITalinoFrameDecoder {
             //test if the received CRC is equal to the one calculated
             if(Byte.compare(byteCRC, BITalinoCRC.getCRC4(arrayCRC)) == 0){
                 frame = new BITalinoFrame(identifier);
+                frame.setSequence(((buffer[j - 0] & 0xF0) >> 4) & 0xf);
+                frame.setDigital(0, (buffer[j - 1] >> 7) & 0x01);
+                frame.setDigital(1, (buffer[j - 1] >> 6) & 0x01);
+                frame.setDigital(2, (buffer[j - 1] >> 5) & 0x01);
+                frame.setDigital(3, (buffer[j - 1] >> 4) & 0x01);
                 //RTC: Adding time data
                 LocalTime APItime = LocalTime.now();
                 frame.setAPIseconds(APItime.getSecond());
                 frame.setAPIminutes(APItime.getMinute());
                 frame.setAPIhours(APItime.getHour());
                 frame.setAPImilliseconds(APItime.getNano()/1000000);
-                frame.setSequence(((buffer[j - 0] & 0xF0) >> 4) & 0xf);
-                frame.setDigital(0, (buffer[j - 1] >> 7) & 0x01);
-                frame.setDigital(1, (buffer[j - 1] >> 6) & 0x01);
-                frame.setDigital(2, (buffer[j - 1] >> 5) & 0x01);
-                frame.setDigital(3, (buffer[j - 1] >> 4) & 0x01);
 
                 // parse buffer frame
                 if (analogChannels.length >= 1) {

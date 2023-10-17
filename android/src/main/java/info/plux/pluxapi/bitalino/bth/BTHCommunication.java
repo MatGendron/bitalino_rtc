@@ -154,6 +154,8 @@ public class BTHCommunication extends BITalinoCommunication {
                 this.analogChannels = validateAnalogChannels(analogChannels);
                 this.totalBytes = calculateTotalBytes(analogChannels);
                 setFreq(sampleRate);
+                //RTC: Getting time reference fro start of acquisition
+                BITtime = LocalTime.now();
 
                 try {
                     Thread.sleep(250);
@@ -191,7 +193,6 @@ public class BTHCommunication extends BITalinoCommunication {
         CommandArguments commandArguments = new CommandArguments();
         commandArguments.setSampleRate(validateSampleRate(sampleRate));
         ComSampleRate = validateSampleRate(sampleRate);
-        BITtime = LocalTime.now();
 
         byte[] command = BITalino.SET_FREQ.getCommand(commandArguments).command;
 
@@ -724,6 +725,8 @@ public class BTHCommunication extends BITalinoCommunication {
                                         int nSeq = bitalinoFrame.getSequence() - previousSeq;
                                         Log.e(TAG, mBluetoothDeviceAddress + " - lost: " + nSeq + " frames");
                                     }
+                                    //RTC: Incrementing and adding time computed from BITalino sequence
+                                    //number to the BITalino data frame
                                     BITtime.plusNanos(((bitalinoFrame.getSequence() - previousSeq) % 16) *
                                             (1000/ComSampleRate) * 1000000 );
                                     bitalinoFrame.setBITseconds(BITtime.getSecond());
