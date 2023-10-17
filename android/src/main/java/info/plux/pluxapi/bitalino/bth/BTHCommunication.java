@@ -727,8 +727,8 @@ public class BTHCommunication extends BITalinoCommunication {
                                     }
                                     //RTC: Incrementing and adding time computed from BITalino sequence
                                     //number to the BITalino data frame
-                                    BITtime = BITtime.plusNanos(((bitalinoFrame.getSequence() - previousSeq) % 16) *
-                                            (1000/ComSampleRate) * 1000000 );
+                                    BITtime = BITtime.plusNanos(Integer.remainderUnsigned(bitalinoFrame.getSequence() - previousSeq, 16) *
+                                            (1000/ComSampleRate) * 1000000);
                                     bitalinoFrame.setBITseconds(BITtime.getSecond());
                                     bitalinoFrame.setBITminutes(BITtime.getMinute());
                                     bitalinoFrame.setBIThours(BITtime.getHour());
