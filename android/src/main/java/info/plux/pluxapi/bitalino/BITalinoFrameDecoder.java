@@ -26,33 +26,41 @@ public class BITalinoFrameDecoder {
     public static BITalinoFrame decode(final String identifier, final byte[] buffer, final int[] analogChannels, final int totalBytes) throws IOException, BITalinoException {
 
         try {
-            Log.e(TAG, Integer.toString(totalBytes));
+            //Logging parameters
+            Log.e(TAG, identifier);
             Log.e(TAG, Arrays.toString(buffer));
             Log.e(TAG, bytesToHex(buffer));
+            Log.e(TAG, Arrays.toString(analogChannels));
+            Log.e(TAG, Integer.toString(totalBytes));
             BITalinoFrame frame;
             //les données de temps ajoutées
             final int j = (totalBytes - 1);
 
             //get frame CRC
             byte byteCRC = (byte)((buffer[j] & 0xFF) & 0x0F);
+            Log.e(TAG, Byte.toString(byteCRC));
 
             //CRC4 is for the all packet, from the sequence_number until the last byte of byte_n
             byte[] arrayCRC = buffer;
+            Log.e(TAG, Arrays.toString(arrayCRC));
 
             //test if the received CRC is equal to the one calculated
             if(Byte.compare(byteCRC, BITalinoCRC.getCRC4(arrayCRC)) == 0){
                 frame = new BITalinoFrame(identifier);
+                Log.e(TAG, "BITalino frame created");
                 frame.setSequence(((buffer[j - 0] & 0xF0) >> 4) & 0xf);
                 frame.setDigital(0, (buffer[j - 1] >> 7) & 0x01);
                 frame.setDigital(1, (buffer[j - 1] >> 6) & 0x01);
                 frame.setDigital(2, (buffer[j - 1] >> 5) & 0x01);
                 frame.setDigital(3, (buffer[j - 1] >> 4) & 0x01);
+                Log.e(TAG, "Sequence and digital channels set");
                 //RTC: Adding time data
                 LocalTime APItime = LocalTime.now();
                 frame.setAPIseconds(APItime.getSecond());
                 frame.setAPIminutes(APItime.getMinute());
                 frame.setAPIhours(APItime.getHour());
                 frame.setAPImilliseconds(APItime.getNano()/1000000);
+                Log.e(TAG, "APItime set");
 
                 // parse buffer frame
                 if (analogChannels.length >= 1) {
@@ -73,6 +81,7 @@ public class BITalinoFrameDecoder {
                 if (analogChannels.length >= 6) {
                     frame.setAnalog(analogChannels[5], (buffer[j - 7] & 0x3F));
                 }
+                Log.e(TAG, "Analog data set");
             } else {
                 frame = new BITalinoFrame(identifier);
                 frame.setSequence(-1);
