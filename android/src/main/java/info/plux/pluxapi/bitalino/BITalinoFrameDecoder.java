@@ -26,7 +26,7 @@ public class BITalinoFrameDecoder {
     public static BITalinoFrame decode(final String identifier, final byte[] buffer, final int[] analogChannels, final int totalBytes) throws IOException, BITalinoException {
 
         try {
-            Log.e(TAG, totalBytes);
+            Log.e(TAG, Integer.toString(totalBytes));
             Log.e(TAG, Arrays.toString(buffer));
             Log.e(TAG, bytesToHex(buffer));
             BITalinoFrame frame;
