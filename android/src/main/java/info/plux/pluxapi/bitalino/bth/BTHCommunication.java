@@ -7,7 +7,7 @@
 * Use is subject to license terms.
 *
 * @modifiedby    Mathis Gendron
-* @date          June 2023 
+* @date          October 2023 
 */
 package info.plux.pluxapi.bitalino.bth;
 

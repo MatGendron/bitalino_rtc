@@ -316,6 +316,7 @@ final class BITalino implements MethodChannel.MethodCallHandler {
         this.dataStreamSink = null;
     }
 
+    //RTC: Adding new fields to be streamed to flutter API
     void sendToDataStreamChannel(BITalinoFrame frame){
         if(dataStreamSink!=null) {
             final Map<String, Object> dataBuffer = new HashMap<>();
