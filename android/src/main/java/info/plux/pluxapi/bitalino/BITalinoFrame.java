@@ -6,6 +6,8 @@
 * This software is the proprietary information of PLUX S.A.
 * Use is subject to license terms.
 *
+* @modifiedby    Mathis Gendron
+* @date          June 2023 
 */
 package info.plux.pluxapi.bitalino;
 
