@@ -1,3 +1,9 @@
+## Notice of Modification
+
+This work has been modified by Mathis Gendron to answer requirements for the EMA-SENS project directed by Ernesto Sanz-Arigita for the SWAN team of the INCIA and Liliana Audin-Garcia for the CIH team of the IMS laboratory.
+
+Last modified on June 26th 2023
+
 ## Important
 
 I stopped working in this plugin. I'm currently working in the development of a new biosignals acquisition device named "ScientISST". Learn more about it here:
@@ -7,6 +13,7 @@ https://scientisst.com
 ---
 
 # BITalino
+
 <p>
   <img src="https://img.shields.io/badge/version-2.0.1-blue.svg" />
 </p>
@@ -26,8 +33,8 @@ This plugin uses the available native APIs available at https://bitalino.com/en/
 
 | Plaftorm | Supported |                                 Native Repository                                 |     Date     |
 | :------: | :-------: | :-------------------------------------------------------------------------------: | :----------: |
-| Android  |     ✅     | [revolution-android-api](https://github.com/BITalinoWorld/revolution-android-api) | Jul 16, 2020 |
-|   IOS    |     ✅     |         [BITalinoBLE-iOS](https://github.com/jasminnisic/BITalinoBLE-iOS)         | Jun 22, 2016 |
+| Android  |    ✅     | [revolution-android-api](https://github.com/BITalinoWorld/revolution-android-api) | Jul 16, 2020 |
+|   IOS    |    ✅     |         [BITalinoBLE-iOS](https://github.com/jasminnisic/BITalinoBLE-iOS)         | Jun 22, 2016 |
 
 # Installation
 
@@ -41,6 +48,7 @@ dependencies:
 ```
 
 ## Android
+
 On Android, you must set the `minSdkVersion` to **18** (or higher) in your `android/app/build.gradle` file.
 
 ```gradle
@@ -50,6 +58,7 @@ minSdkVersion 18
 ## IOS
 
 On IOS, you have to add the following lines to the bottom of the `/ios/Runner/Info.plist` file:
+
 ```plist
 <key>NSBluetoothAlwaysUsageDescription</key>
 <string>This application needs access to bluetooth to communicate with BITalino device</string>
@@ -61,7 +70,6 @@ On IOS, you have to add the following lines to the bottom of the `/ios/Runner/In
 # Examples
 
 ## Initialize controller
-
 
 ### Android
 
@@ -96,7 +104,7 @@ BITalinoController bitalinoController = BITalinoController(
 
 try {
   await bitalinoController.initialize(
-    
+
   );
 } on PlatformException catch (Exception) {
   print("Initialization failed: ${Exception.message}");
@@ -104,7 +112,9 @@ try {
 ```
 
 ## Connect to device
+
 Connect to a device by providing its address.
+
 ```dart
 await bitalinoController.connect(
   onConnectionLost: () {
@@ -114,6 +124,7 @@ await bitalinoController.connect(
 ```
 
 ## Start acquisition
+
 Start acquiring analog channels: A0, A2, A4, and A5, with a Sampling Rate of 10Hz.
 `onDataAvailable` is called everytime the application receives data during recording.
 
@@ -128,9 +139,11 @@ bool success = await bitalinoController.start(
     },),
 );
 ```
+
 During acquisiton, the onDataAvailable callback is called.
 
 ## Stop acquisition
+
 ```dart
 bool success = await bitalinoController.stop();
 ```
@@ -138,6 +151,7 @@ bool success = await bitalinoController.stop();
 ## Get the device state
 
 ### Android
+
 ```dart
 BITalinoState state = await bitalinoController.state();
 print(state.identifier);        // [String]
@@ -148,15 +162,19 @@ print(state.digital);           // [List<int>]
 ```
 
 ### IOS
+
 This method is not available for IOS.
 
 ## Disconnect from device
+
 ```dart
 bool success = await bitalinoController.disconnect();
 ```
 
 ## Dispose controller
+
 When you're done using the controller, dispose it.
+
 ```dart
 bool success = await bitalinoController.dispose();
 ```
@@ -177,7 +195,3 @@ Also, **feel free to contribute** to this project! :)
 ## License
 
 GNU General Public License v3.0, see the [LICENSE.md](https://github.com/Afonsocraposo/bitalino/tree/master/LICENSE) file for details.
-
-
-
-
